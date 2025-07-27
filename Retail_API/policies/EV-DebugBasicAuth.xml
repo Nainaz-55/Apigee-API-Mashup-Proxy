@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables continueOnError="false" enabled="true" name="EV-DebugBasicAuth">
+  <DisplayName>EV-DebugBasicAuth</DisplayName>
+  <Variable name="private.backendId">
+    <Pattern>{retrievedBackendId}</Pattern>
+  </Variable>
+  <Variable name="private.backendSecret">
+    <Pattern>{retrievedBackendSecret}</Pattern>
+  </Variable>
+  <Variable name="request.header.Authorization">
+    <Pattern>{builtAuthHeader}</Pattern>
+  </Variable>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</ExtractVariables>

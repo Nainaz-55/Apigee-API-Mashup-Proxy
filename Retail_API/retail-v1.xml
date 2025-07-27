@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="3" name="retail-v1">
+  <DisplayName/>
+  <Description>My retail API</Description>
+  <CreatedAt>1753628620351</CreatedAt>
+  <LastModifiedAt>1753628620351</LastModifiedAt>
+  <BasePaths>/retail/v1</BasePaths>
+  <Policies>
+    <Policy>VA-VerifyKey</Policy>
+    <Policy>OAuthV2-VerifyToken</Policy>
+    <Policy>AM-RemoveAuth</Policy>
+    <Policy>JSONTP-Protect</Policy>
+    <Policy>KVM-GetCredentials</Policy>
+    <Policy>BA-AddAuthHeader</Policy>
+    <Policy>EV-DebugBasicAuth</Policy>
+    <Policy>J2X-Convert</Policy>
+    <Policy>EV-ExtractLatLng</Policy>
+    <Policy>SC-GoogleGeocode</Policy>
+    <Policy>EV-ExtractAddress</Policy>
+    <Policy>JS-AddAddress</Policy>
+  </Policies>
+  <ProxyEndpoints>
+    <ProxyEndpoint>default</ProxyEndpoint>
+  </ProxyEndpoints>
+  <Resources>
+    <Resource>jsc://addAddress.js</Resource>
+  </Resources>
+  <TargetEndpoints>
+    <TargetEndpoint>default</TargetEndpoint>
+  </TargetEndpoints>
+</APIProxy>

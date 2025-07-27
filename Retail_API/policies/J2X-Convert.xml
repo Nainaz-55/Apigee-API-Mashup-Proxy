@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<JSONToXML continueOnError="false" enabled="true" name="J2X-Convert">
+  <Options>
+    <InvalidCharsReplacement>_</InvalidCharsReplacement>
+    <ObjectRootElementName>response</ObjectRootElementName>
+    <Indent>true</Indent>
+  </Options>
+  <OutputVariable>response</OutputVariable>
+  <Source>response</Source>
+</JSONToXML>

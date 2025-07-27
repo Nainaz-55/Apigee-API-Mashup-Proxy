@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+  <Description/>
+  <FaultRules/>
+  <PreFlow name="PreFlow">
+    <Request>
+      <Step>
+        <Name>VA-VerifyKey</Name>
+      </Step>
+      <Step>
+        <Name>AM-RemoveAuth</Name>
+      </Step>
+    </Request>
+    <Response/>
+  </PreFlow>
+  <PostFlow name="PostFlow">
+    <Request/>
+    <Response>
+      <Step>
+        <Condition>request.header.Accept == "application/xml"</Condition>
+        <Name>J2X-Convert</Name>
+      </Step>
+    </Response>
+  </PostFlow>
+  <Flows>
+    <Flow name="getCategories">
+      <Description>Get all categories</Description>
+      <Request/>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/categories") and (request.verb = "GET")</Condition>
+    </Flow>
+    <Flow name="getCategoryById">
+      <Description>Get a specific category</Description>
+      <Request/>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/categories/{categoryId}") and (request.verb = "GET")</Condition>
+    </Flow>
+    <Flow name="getStores">
+      <Description>Get all stores</Description>
+      <Request/>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/stores") and (request.verb = "GET")</Condition>
+    </Flow>
+    <Flow name="getStoreById">
+      <Description>Get a specific store</Description>
+      <Request/>
+      <Response>
+        <Step>
+          <Name>EV-ExtractLatLng</Name>
+        </Step>
+        <Step>
+          <Name>SC-GoogleGeocode</Name>
+        </Step>
+        <Step>
+          <Name>EV-ExtractAddress</Name>
+        </Step>
+        <Step>
+          <Name>JS-AddAddress</Name>
+        </Step>
+      </Response>
+      <Condition>(proxy.pathsuffix MatchesPath "/stores/{storeId}") and (request.verb = "GET")</Condition>
+    </Flow>
+    <Flow name="getProducts">
+      <Description>Get all products</Description>
+      <Request/>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/products") and (request.verb = "GET")</Condition>
+    </Flow>
+    <Flow name="getProductById">
+      <Description>Get a specific product</Description>
+      <Request/>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/products/{productId}") and (request.verb = "GET")</Condition>
+    </Flow>
+    <Flow name="updateProductById">
+      <Description>Update a specific product</Description>
+      <Request>
+        <Step>
+          <Name>KVM-GetCredentials</Name>
+        </Step>
+        <Step>
+          <Name>BA-AddAuthHeader</Name>
+        </Step>
+      </Request>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/products/{productId}") and (request.verb = "PATCH")</Condition>
+    </Flow>
+    <Flow name="createOrder">
+      <Description>Create a new order</Description>
+      <Request>
+        <Step>
+          <Name>JSONTP-Protect</Name>
+        </Step>
+      </Request>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/orders") and (request.verb = "POST")</Condition>
+    </Flow>
+    <Flow name="getOrderById">
+      <Description>Get a specific order</Description>
+      <Request/>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/orders/{orderId}") and (request.verb = "GET")</Condition>
+    </Flow>
+    <Flow name="deleteOrderById">
+      <Description>Delete a specific order</Description>
+      <Request/>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/orders/{orderId}") and (request.verb = "DELETE")</Condition>
+    </Flow>
+  </Flows>
+  <HTTPProxyConnection>
+    <BasePath>/retail/v1</BasePath>
+    <Properties/>
+    <VirtualHost>default</VirtualHost>
+  </HTTPProxyConnection>
+  <RouteRule name="default">
+    <TargetEndpoint>default</TargetEndpoint>
+  </RouteRule>
+</ProxyEndpoint>

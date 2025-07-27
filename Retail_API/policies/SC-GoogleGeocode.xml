@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout continueOnError="false" enabled="true" name="SC-GoogleGeocode">
+  <Request>
+    <Set>
+      <QueryParams>
+        <QueryParam name="latlng">{lat},{lng}</QueryParam>
+        <QueryParam name="key">API-ENG-TRAINING-GEOCODING-KEY</QueryParam>
+      </QueryParams>
+      <Verb>GET</Verb>
+    </Set>
+  </Request>
+  <Response>calloutResponse</Response>
+  <HTTPTargetConnection>
+    <URL>https://gcp-cs-training-01-prod.apigee.net/googleapis/maps/api/geocode/json</URL>
+  </HTTPTargetConnection>
+</ServiceCallout>
